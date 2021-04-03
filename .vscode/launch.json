@@ -1,0 +1,44 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Dashboard",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/common_cases/dashboard.dart"
+        },
+        {
+            "name": "Bottom Navigation Bar",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/common_cases/bottom_nav_bar.dart"
+        },
+        {
+            "name": "Deeplink Pathparam",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/flutter_uxr/deeplink_pathparam.dart"
+        },
+        {
+            "name": "Deeplink Queryparam",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/flutter_uxr/deeplink_queryparam.dart"
+        },
+        {
+            "name": "Dynamic Linking",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/flutter_uxr/dynamic_linking.dart"
+        },
+        {
+            "name": "Skipping Stacks",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/flutter_uxr/skipping_stacks.dart"
+        }
+    ]
+}
