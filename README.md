@@ -31,10 +31,11 @@ An app with this structure can be done like [this](lib/common_cases/bottom_nav_b
 
 Here you can find the code for the scenarios described in the [storyboards](https://github.com/flutter/uxr/tree/master/nav2-usability/storyboards) from [flutter uxr project](https://github.com/flutter/uxr)
 
-- [Deeplink Pathparam](deeplink_pathparam.dart)
-- [Deeplink Queryparam](deeplink_queryparam.dart)
-- [Dynamic Linking](dynamic_linking.dart)
-- [Skipping Stacks](skipping_stacks.dart)
+- [Deeplink Pathparam](lib/flutter_uxr/deeplink_pathparam.dart)
+- [Deeplink Queryparam](lib/flutter_uxr/deeplink_queryparam.dart)
+- [Dynamic Linking](lib/flutter_uxr/dynamic_linking.dart)
+- [Skipping Stacks](lib/flutter_uxr/skipping_stacks.dart)
+- [Sign in Routing](lib/flutter_uxr/sign_in_routing.dart)
 
 ## More Samples
 

@@ -39,6 +39,12 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/flutter_uxr/skipping_stacks.dart"
+        },
+        {
+            "name": "Signin Routing",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/flutter_uxr/sign_in_routing.dart"
         }
     ]
 }
