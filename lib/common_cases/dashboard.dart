@@ -134,14 +134,17 @@ class Sidebar extends StatelessWidget {
           children: [
             ListTile(
               title: Text('Info'),
+              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/info'),
               onTap: () => QR.to('/dashboard/info'),
             ),
             ListTile(
               title: Text('Orders'),
+              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/orders'),
               onTap: () => QR.to('/dashboard/orders'),
             ),
             ListTile(
               title: Text('Items'),
+              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/items'),
               onTap: () => QR.to('/dashboard/items'),
             )
           ],
@@ -149,13 +152,30 @@ class Sidebar extends StatelessWidget {
       );
 }
 
-class DashboardChild extends StatelessWidget {
+class DashboardChild extends StatefulWidget {
   final String name;
   final Color color;
   DashboardChild(this.name, this.color);
   @override
+  _DashboardChildState createState() => _DashboardChildState();
+}
+
+class _DashboardChildState extends State<DashboardChild> {
+  @override
+  void initState() {
+    super.initState();
+    print('Dashboard child created ${widget.name}');
+  }
+
+  @override
+  void dispose() {
+    print('dashboard child deleted ${widget.name}');
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => Container(
-        color: color,
-        child: Center(child: Text(name, style: TextStyle(fontSize: 20))),
+        color: widget.color,
+        child: Center(child: Text(widget.name, style: TextStyle(fontSize: 20))),
       );
 }
