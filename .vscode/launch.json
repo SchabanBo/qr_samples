@@ -45,6 +45,12 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/flutter_uxr/sign_in_routing.dart"
+        },
+        {
+            "name": "Nested in Nested",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/special_cases/nested_in_nested.dart"
         }
     ]
 }
