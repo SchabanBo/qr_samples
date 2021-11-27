@@ -51,6 +51,12 @@
             "type": "dart",
             "request": "launch",
             "program": "lib/special_cases/nested_in_nested.dart"
+        },
+        {
+            "name": "Nested routes with similar path",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/test_cases/nested_routes_with_similar_path.dart"
         }
     ]
 }
