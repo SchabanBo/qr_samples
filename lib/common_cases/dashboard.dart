@@ -72,9 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
             TextButton(
                 onPressed: () => QR.navigator.replaceAll('/dashboard'),
                 child: Text('Login')),
-            TextButton(
-                onPressed: () => QR.navigator.replaceAll('/signup'),
-                child: Text('Or Signup'))
+            TextButton(onPressed: null, child: Text('Or Signup'))
           ],
         ),
       );

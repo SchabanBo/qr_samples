@@ -23,7 +23,7 @@ class MyApp extends StatelessWidget {
             path:
                 '/books/:id([0-${books.length - 1}])', // The only available pages are the pages in the list
             middleware: [
-              QMiddlewareBuilder(canPopFunc: () => canpop),
+              QMiddlewareBuilder(canPopFunc: () async => canpop),
             ],
             builder: () => BookDetailsScreen(books[QR.params['id']!.asInt!])),
       ]));
