@@ -56,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backwardsCompatibility: false,
           title: Text('Login'),
           centerTitle: true,
         ),
@@ -95,7 +94,6 @@ class _SignupScreenState extends State<SignupScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backwardsCompatibility: false,
           title: Text('Signup'),
           centerTitle: true,
         ),
@@ -138,9 +136,17 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     // We need to add listener here so the bottomNavigationBar
     // get updated (the selected tab) when we navigate to new page
-    widget.router.navigator.addListener(() {
-      setState(() {});
-    });
+    widget.router.navigator.addListener(_update);
+  }
+
+  void _update() {
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    widget.router.navigator.removeListener(_update);
+    super.dispose();
   }
 
   @override

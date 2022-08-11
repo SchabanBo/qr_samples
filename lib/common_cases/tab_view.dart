@@ -40,17 +40,20 @@ class _MobileViewState extends State<MobileView>
       vsync: this,
     );
 
-    // Add listener to update the selected tab when the route changes from outside of this widget.
-    final navigator = widget.router.navigator;
-    navigator.addListener(() {
-      _tabController.animateTo(
-        MobileRoutes.tabs.indexOf(navigator.currentRoute.name!),
-      );
-    });
+    // Add listener to update the selected tab when the route changes
+    // from outside of this widget.
+    widget.router.navigator.addListener(_updateTab);
+  }
+
+  void _updateTab() {
+    _tabController.animateTo(
+      MobileRoutes.tabs.indexOf(widget.router.navigator.currentRoute.name!),
+    );
   }
 
   @override
   void dispose() {
+    widget.router.navigator.removeListener(_updateTab);
     _tabController.dispose();
     super.dispose();
   }
