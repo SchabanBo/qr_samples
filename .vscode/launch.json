@@ -23,6 +23,12 @@
             "program": "lib/common_cases/tab_view.dart"
         },
         {
+            "name": "Return Data",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/examples/return_data.dart"
+        },
+        {
             "name": "Deeplink Pathparam",
             "type": "dart",
             "request": "launch",
