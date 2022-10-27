@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
-void main() {
-  runApp(const MyApp());
-}
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
   static List<String> tabs = [
@@ -20,20 +18,23 @@ class MyApp extends StatelessWidget {
     final routes = [
       QRoute.withChild(
           path: '/home',
-          builderChild: (c) => HomePage(c),
+          builderChild: (c) => NavRailExample(c),
           children: [
             QRoute(
               name: tabs[0],
+              pageType: const QSlidePage(),
               path: '/',
               builder: () => Tab('Home', Colors.grey.shade900),
             ),
             QRoute(
               name: tabs[1],
+              pageType: const QSlidePage(),
               path: '/store',
               builder: () => Tab('Store', Colors.grey.shade700),
             ),
             QRoute(
               name: tabs[2],
+              pageType: const QSlidePage(),
               path: '/settings',
               builder: () => Tab('Settings', Colors.grey.shade500),
             ),
@@ -47,32 +48,48 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatefulWidget {
+class NavRailExample extends StatefulWidget {
   final QRouter router;
-  const HomePage(this.router, {Key? key}) : super(key: key);
+  const NavRailExample(this.router, {Key? key}) : super(key: key);
+
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<NavRailExample> createState() => _NavRailExampleState();
 }
 
-class _HomePageState extends RouterState<HomePage> {
-  @override
-  Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: const Text('My App')),
-        body: widget.router,
-        bottomNavigationBar: BottomNavigationBar(
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: 'home'),
-            BottomNavigationBarItem(icon: Icon(Icons.store), label: 'store'),
-            BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: 'Settings')
-          ],
-          currentIndex: MyApp.indexOf(widget.router.routeName),
-          onTap: (v) => QR.toName(MyApp.tabs[v]),
-        ),
-      );
-
+class _NavRailExampleState extends RouterState<NavRailExample> {
   @override
   QRouter get router => widget.router;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: SafeArea(
+        child: Row(
+          children: <Widget>[
+            NavigationRail(
+              selectedIndex: MyApp.indexOf(widget.router.routeName),
+              onDestinationSelected: (v) => QR.toName(MyApp.tabs[v]),
+              destinations: const <NavigationRailDestination>[
+                NavigationRailDestination(
+                  icon: Icon(Icons.home),
+                  label: Text('Home'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.store),
+                  label: Text('Store'),
+                ),
+                NavigationRailDestination(
+                  icon: Icon(Icons.settings),
+                  label: Text('Settings'),
+                ),
+              ],
+            ),
+            const VerticalDivider(thickness: 1, width: 1),
+            Expanded(child: widget.router),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
 class Tab extends StatelessWidget {

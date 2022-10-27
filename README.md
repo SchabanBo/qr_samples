@@ -4,6 +4,8 @@
   - [Common use cases](#common-use-cases)
     - [Dashboard](#dashboard)
     - [Bottom Navigation Bar](#bottom-navigation-bar)
+    - [Tab view](#tab-view)
+    - [Navigation rail](#navigation-rail)
   - [Flutter UXR](#flutter-uxr)
   - [More Samples](#more-samples)
 
@@ -26,6 +28,14 @@ And now from anywhere from your code you can call `QR.to('/dashboard/orders')` a
 An app with this structure can be done like [this](lib/common_cases/bottom_nav_bar.dart)
 
 ![Dashboard](assets/BottomNB.png)
+
+### Tab view
+
+[TabView](lib/common_cases/tab_view.dart)
+
+### Navigation rail
+
+[NavRail](lib/common_cases/nav_rail.dart)
 
 ## Flutter UXR
 

@@ -2,56 +2,63 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
   static bool isAuthed = false;
-  final routes = [
-    QRoute(path: '/', builder: () => LandingPage()),
-    QRoute(path: '/login', builder: () => LoginScreen()),
-    QRoute.withChild(
-        path: '/dashboard',
-        builderChild: (c) => Dashboard(c),
-        initRoute: '/info', // Set the init route for this router
-        middleware: [
-          // Set Auth middleware to redirect user when is not authed
-          QMiddlewareBuilder(
-              redirectGuardFunc: (s) async => isAuthed ? null : '/login'),
-        ],
-        children: [
-          QRoute(
-              path: '/info',
-              builder: () => DashboardChild('Info', Colors.blueGrey.shade900)),
-          QRoute(
-              path: '/orders',
-              builder: () =>
-                  DashboardChild('Orders', Colors.blueGrey.shade700)),
-          QRoute(
-              path: '/items',
-              builder: () => DashboardChild('Items', Colors.blueGrey.shade500)),
-        ]),
-  ];
+  const MyApp({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
-        routeInformationParser: QRouteInformationParser(),
-        routerDelegate: QRouterDelegate(routes),
-        theme: ThemeData.dark(),
-      );
+  Widget build(BuildContext context) {
+    final routes = [
+      QRoute(path: '/', builder: () => const SplashPage()),
+      QRoute(path: '/login', builder: () => const LoginScreen()),
+      QRoute.withChild(
+          path: '/dashboard',
+          builderChild: (c) => Dashboard(c),
+          initRoute: '/info', // Set the init route for this router
+          middleware: [
+            // Set Auth middleware to redirect user when is not authed
+            QMiddlewareBuilder(
+              redirectGuardFunc: (s) async => isAuthed ? null : '/login',
+            ),
+          ],
+          children: [
+            QRoute(
+                path: '/info',
+                pageType: const QFadePage(),
+                builder: () => DashboardChild('Info', Colors.grey.shade900)),
+            QRoute(
+                path: '/orders',
+                pageType: const QFadePage(),
+                builder: () => DashboardChild('Orders', Colors.grey.shade700)),
+            QRoute(
+                path: '/items',
+                pageType: const QFadePage(),
+                builder: () => DashboardChild('Items', Colors.grey.shade500)),
+          ]),
+    ];
+    return MaterialApp.router(
+      routeInformationParser: const QRouteInformationParser(),
+      routerDelegate: QRouterDelegate(routes),
+      theme: ThemeData.dark(),
+    );
+  }
 }
 
 class LoginScreen extends StatefulWidget {
+  const LoginScreen({Key? key}) : super(key: key);
+
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          backwardsCompatibility: false,
-          title: Text('Login'),
+          title: const Text('Login'),
           centerTitle: true,
         ),
         body: Column(
@@ -59,7 +66,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text('Is Authed'),
+                const Text('Is Authed'),
                 Switch(
                     value: MyApp.isAuthed,
                     onChanged: (v) {
@@ -70,27 +77,29 @@ class _LoginScreenState extends State<LoginScreen> {
               ],
             ),
             TextButton(
-                onPressed: () => QR.navigator.replaceAll('/dashboard'),
-                child: Text('Login')),
-            TextButton(onPressed: null, child: Text('Or Signup'))
+              onPressed: () => QR.navigator.replaceAll('/dashboard'),
+              child: const Text('Login'),
+            ),
           ],
         ),
       );
 }
 
-class LandingPage extends StatelessWidget {
+class SplashPage extends StatelessWidget {
+  const SplashPage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) => Scaffold(
         body: FutureBuilder<bool>(
-            future: Future.delayed(Duration(seconds: 2), () => true),
+            future: Future.delayed(const Duration(seconds: 2), () => true),
             builder: (c, s) {
               if (s.hasData) {
                 QR.navigator.replaceAll('/dashboard');
                 return Container();
               }
-              return Center(
+              return const Center(
                   child: Text(
-                'Wellcome To my Sample',
+                'Welcome To my Sample',
                 style: TextStyle(fontSize: 25, color: Colors.amber),
               ));
             }),
@@ -99,11 +108,11 @@ class LandingPage extends StatelessWidget {
 
 class Dashboard extends StatelessWidget {
   final QRouter router;
-  Dashboard(this.router);
+  const Dashboard(this.router, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(
-          title: Text('Dashboard'),
+          title: const Text('Dashboard'),
           centerTitle: true,
           actions: [
             IconButton(
@@ -111,12 +120,15 @@ class Dashboard extends StatelessWidget {
                   MyApp.isAuthed = false;
                   QR.navigator.replaceAll('/login');
                 },
-                icon: Icon(Icons.logout))
+                icon: const Icon(Icons.logout))
           ],
         ),
         body: Row(
           children: [
-            Flexible(child: Sidebar()),
+            SizedBox(
+              width: MediaQuery.of(context).size.width * 0.2,
+              child: const Sidebar(),
+            ),
             Expanded(flex: 4, child: router)
           ],
         ),
@@ -124,56 +136,47 @@ class Dashboard extends StatelessWidget {
 }
 
 class Sidebar extends StatelessWidget {
+  const Sidebar({Key? key}) : super(key: key);
+
   @override
-  Widget build(BuildContext context) => Container(
-        color: Colors.grey.shade800,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            ListTile(
-              title: Text('Info'),
-              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/info'),
-              onTap: () => QR.to('/dashboard/info'),
-            ),
-            ListTile(
-              title: Text('Orders'),
-              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/orders'),
-              onTap: () => QR.to('/dashboard/orders'),
-            ),
-            ListTile(
-              title: Text('Items'),
-              //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/items'),
-              onTap: () => QR.to('/dashboard/items'),
-            )
-          ],
-        ),
-      );
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.grey.shade800,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          ListTile(
+            title: const Text('Info'),
+            //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/info'),
+            onTap: () => QR.to('/dashboard/info'),
+          ),
+          ListTile(
+            title: const Text('Orders'),
+            //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/orders'),
+            onTap: () => QR.to('/dashboard/orders'),
+          ),
+          ListTile(
+            title: const Text('Items'),
+            //onTap: () => QR.navigatorOf('/dashboard').replaceAll('/items'),
+            onTap: () => QR.to('/dashboard/items'),
+          )
+        ],
+      ),
+    );
+  }
 }
 
-class DashboardChild extends StatefulWidget {
+class DashboardChild extends StatelessWidget {
   final String name;
   final Color color;
-  DashboardChild(this.name, this.color);
+  const DashboardChild(this.name, this.color, {Key? key}) : super(key: key);
   @override
-  _DashboardChildState createState() => _DashboardChildState();
-}
-
-class _DashboardChildState extends State<DashboardChild> {
-  @override
-  void initState() {
-    super.initState();
-    print('Dashboard child created ${widget.name}');
+  Widget build(BuildContext context) {
+    return Container(
+      color: color,
+      child: Center(
+        child: Text(name, style: const TextStyle(fontSize: 20)),
+      ),
+    );
   }
-
-  @override
-  void dispose() {
-    print('dashboard child deleted ${widget.name}');
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => Container(
-        color: widget.color,
-        child: Center(child: Text(widget.name, style: TextStyle(fontSize: 20))),
-      );
 }

@@ -56,7 +56,7 @@ class AppRoutes {
         QRoute(
             path: '/books',
             middleware: [auth],
-            builder: () => BooksListScreen()),
+            builder: () => const BooksListScreen()),
         QRoute(
             path: '/signin',
             builder: () => SignInScreen(onSignedIn: auth.signIn)),
@@ -67,13 +67,13 @@ class BooksApp extends StatelessWidget {
   final routes = AppRoutes();
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-      routeInformationParser: QRouteInformationParser(),
+      routeInformationParser: const QRouteInformationParser(),
       routerDelegate: QRouterDelegate(routes.routes()));
 }
 
 class HomeScreen extends StatelessWidget {
   final VoidCallback onSignOut;
-  HomeScreen({
+  const HomeScreen({
     required this.onSignOut,
   });
 
@@ -86,11 +86,11 @@ class HomeScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () => QR.to('/books'),
-              child: Text('View my bookshelf'),
+              child: const Text('View my bookshelf'),
             ),
             ElevatedButton(
               onPressed: onSignOut,
-              child: Text('Sign out'),
+              child: const Text('Sign out'),
             ),
           ],
         ),
@@ -102,7 +102,7 @@ class HomeScreen extends StatelessWidget {
 class SignInScreen extends StatefulWidget {
   final ValueChanged<Credentials> onSignedIn;
 
-  SignInScreen({required this.onSignedIn});
+  const SignInScreen({required this.onSignedIn});
   @override
   _SignInScreenState createState() => _SignInScreenState();
 }
@@ -119,11 +119,11 @@ class _SignInScreenState extends State<SignInScreen> {
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(hintText: 'username (any)'),
+              decoration: const InputDecoration(hintText: 'username (any)'),
               onChanged: (s) => _username = s,
             ),
             TextField(
-              decoration: InputDecoration(hintText: 'password (any)'),
+              decoration: const InputDecoration(hintText: 'password (any)'),
               obscureText: true,
               onChanged: (s) => _password = s,
             ),
@@ -132,7 +132,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 widget.onSignedIn(Credentials(_username, _password));
                 QR.navigator.replaceAll('/');
               },
-              child: Text('Sign in'),
+              child: const Text('Sign in'),
             ),
           ],
         ),
@@ -142,14 +142,14 @@ class _SignInScreenState extends State<SignInScreen> {
 }
 
 class BooksListScreen extends StatelessWidget {
-  BooksListScreen();
+  const BooksListScreen();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
-        children: [
+        children: const [
           ListTile(
             title: Text('Stranger in a Strange Land'),
             subtitle: Text('Robert A. Heinlein'),

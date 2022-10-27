@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(
-      routeInformationParser: QRouteInformationParser(),
+      routeInformationParser: const QRouteInformationParser(),
       routerDelegate: QRouterDelegate([
         QRoute(path: '/', builder: () => BooksListScreen(books)),
         QRoute(
@@ -33,7 +33,7 @@ class Book {
 
 class BooksListScreen extends StatelessWidget {
   final List<Book> books;
-  BooksListScreen(this.books);
+  const BooksListScreen(this.books);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class BooksListScreen extends StatelessWidget {
 
 class BookDetailsScreen extends StatelessWidget {
   final Book book;
-  BookDetailsScreen(this.book);
+  const BookDetailsScreen(this.book);
   @override
   Widget build(BuildContext context) {
     return Scaffold(

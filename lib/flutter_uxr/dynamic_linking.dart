@@ -37,14 +37,14 @@ class WishlistApp extends StatelessWidget {
             path: '/wishlist/:id',
             builder: () => WishlistScreen(appState.getList()))
       ]),
-      routeInformationParser: QRouteInformationParser(),
+      routeInformationParser: const QRouteInformationParser(),
     );
   }
 }
 
 class WishlistListScreen extends StatefulWidget {
   final AppState appState;
-  WishlistListScreen(this.appState);
+  const WishlistListScreen(this.appState);
   @override
   _WishlistListScreenState createState() => _WishlistListScreenState();
 }
@@ -63,11 +63,11 @@ class _WishlistListScreenState extends State<WishlistListScreen> {
 
   @override
   Widget build(BuildContext context) => Scaffold(
-        appBar: AppBar(title: Text('Wishlist')),
+        appBar: AppBar(title: const Text('Wishlist')),
         body: ListView(
           children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: Text(
                   'Navigate to /wishlist/<ID> in the URL bar to dynamically '
                   'create a new wishlist.'),
@@ -76,7 +76,7 @@ class _WishlistListScreenState extends State<WishlistListScreen> {
               padding: const EdgeInsets.all(8.0),
               child: ElevatedButton(
                 onPressed: () => QR.to('wishlist/${Random().nextInt(1000)}'),
-                child: Text('Create a new Wishlist'),
+                child: const Text('Create a new Wishlist'),
               ),
             ),
             for (var i = 0; i < wishlists.length; i++)
@@ -98,7 +98,7 @@ class _WishlistListScreenState extends State<WishlistListScreen> {
 
 class WishlistScreen extends StatelessWidget {
   final Wishlist wishlist;
-  WishlistScreen(this.wishlist);
+  const WishlistScreen(this.wishlist);
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(),

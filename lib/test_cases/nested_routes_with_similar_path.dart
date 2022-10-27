@@ -105,7 +105,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class PostRouteWrapper extends StatelessWidget {
   final QRouter router;
   final String name;
-  PostRouteWrapper(this.router, this.name);
+  const PostRouteWrapper(this.router, this.name);
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -118,8 +118,8 @@ class PostRouteWrapper extends StatelessWidget {
             TextButton(
                 onPressed: () => router.navigator.pushName('test1-detail',
                     params: {'index': Random().nextInt(1000)}),
-                child: Text(_goToDetailsText)),
-            Container(
+                child: const Text(_goToDetailsText)),
+            SizedBox(
               width: size.width * 0.7,
               height: size.height * 0.7,
               child: router,

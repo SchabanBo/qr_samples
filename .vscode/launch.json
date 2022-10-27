@@ -23,6 +23,12 @@
             "program": "lib/common_cases/tab_view.dart"
         },
         {
+            "name": "Navigation Rail",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/common_cases/nav_rail.dart"
+        },
+        {
             "name": "Return Data",
             "type": "dart",
             "request": "launch",

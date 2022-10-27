@@ -51,7 +51,7 @@ class BooksApp extends StatelessWidget {
                       author: books[QR.params['authorIndex']!.asInt!].author))
             ])
       ]),
-      routeInformationParser: QRouteInformationParser(),
+      routeInformationParser: const QRouteInformationParser(),
     );
   }
 }
@@ -59,7 +59,7 @@ class BooksApp extends StatelessWidget {
 class BooksListScreen extends StatelessWidget {
   final List<Book> books;
 
-  BooksListScreen({required this.books});
+  const BooksListScreen({required this.books});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -79,7 +79,7 @@ class BooksListScreen extends StatelessWidget {
 class AuthorsListScreen extends StatelessWidget {
   final List<Author> authors;
 
-  AuthorsListScreen({required this.authors});
+  const AuthorsListScreen({required this.authors});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -88,7 +88,7 @@ class AuthorsListScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () => QR.navigator.replaceAll('/'),
-              child: Text('Go to Books Screen'),
+              child: const Text('Go to Books Screen'),
             ),
             for (var author in authors)
               ListTile(
@@ -103,7 +103,7 @@ class AuthorsListScreen extends StatelessWidget {
 class BookDetailsScreen extends StatelessWidget {
   final Book book;
 
-  BookDetailsScreen({required this.book});
+  const BookDetailsScreen({required this.book});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -128,7 +128,7 @@ class BookDetailsScreen extends StatelessWidget {
 class AuthorDetailsScreen extends StatelessWidget {
   final Author author;
 
-  AuthorDetailsScreen({required this.author});
+  const AuthorDetailsScreen({required this.author});
 
   @override
   Widget build(BuildContext context) => Scaffold(

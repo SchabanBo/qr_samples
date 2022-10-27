@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -9,9 +11,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-        routeInformationParser: QRouteInformationParser(),
-        routerDelegate: QRouterDelegate(
-            [QRoute(path: '/', builder: () => BooksListScreen())]));
+      routeInformationParser: const QRouteInformationParser(),
+      routerDelegate: QRouterDelegate(
+        [QRoute(path: '/', builder: () => BooksListScreen())],
+      ),
+    );
   }
 }
 
@@ -30,14 +34,22 @@ class BooksListScreen extends StatelessWidget {
   ];
   @override
   Widget build(BuildContext context) {
+    print(QR.params.asStringMap());
     final filter = QR.params['filter'];
+    final random = QR.params['random']?.asDouble ?? 0;
     return Scaffold(
       appBar: AppBar(),
       body: ListView(
         children: [
+          Text(random.toString()),
           TextField(
-              decoration: InputDecoration(hintText: 'filter'),
-              onSubmitted: (v) => QR.to('/${v.isEmpty ? '' : '/?filter=$v'}')),
+            decoration: const InputDecoration(hintText: 'filter'),
+            onSubmitted: (v) {
+              QR.params.addAsHidden('random', Random().nextDouble());
+              print(QR.params.asStringMap());
+              QR.to('/${v.isEmpty ? '' : '/?filter=$v'}');
+            },
+          ),
           for (var book in books)
             if (filter == null ||
                 book.title.toLowerCase().contains(filter.toString()))
