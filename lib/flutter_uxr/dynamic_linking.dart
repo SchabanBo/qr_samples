@@ -1,4 +1,5 @@
 import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
@@ -27,6 +28,8 @@ class AppState extends ChangeNotifier {
 
 class WishlistApp extends StatelessWidget {
   final appState = AppState();
+
+  WishlistApp({super.key});
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
@@ -44,9 +47,9 @@ class WishlistApp extends StatelessWidget {
 
 class WishlistListScreen extends StatefulWidget {
   final AppState appState;
-  const WishlistListScreen(this.appState);
+  const WishlistListScreen(this.appState, {super.key});
   @override
-  _WishlistListScreenState createState() => _WishlistListScreenState();
+  State<WishlistListScreen> createState() => _WishlistListScreenState();
 }
 
 class _WishlistListScreenState extends State<WishlistListScreen> {
@@ -98,7 +101,7 @@ class _WishlistListScreenState extends State<WishlistListScreen> {
 
 class WishlistScreen extends StatelessWidget {
   final Wishlist wishlist;
-  const WishlistScreen(this.wishlist);
+  const WishlistScreen(this.wishlist, {super.key});
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: AppBar(),
@@ -108,7 +111,7 @@ class WishlistScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('ID: ${QR.params['id']}',
-                  style: Theme.of(context).textTheme.headline6),
+                  style: Theme.of(context).textTheme.titleLarge),
             ],
           ),
         ),

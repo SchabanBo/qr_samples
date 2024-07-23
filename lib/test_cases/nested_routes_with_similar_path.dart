@@ -5,7 +5,7 @@ import 'package:qlevar_router/qlevar_router.dart';
 
 // https://github.com/SchabanBo/qlevar_router/issues/45
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 List<String> tabs = [
@@ -18,22 +18,26 @@ const String _goToDetailsText = "GoToDetails";
 int counter = 0;
 
 class MyApp extends StatelessWidget {
-  final routes = [
-    QRoute.withChild(
-      path: '/home',
-      initRoute: '/test1',
-      builderChild: (router) => HomeScreen(router: router),
-      children: [
-        PostRoute().routes(tabs[0]),
-        PostRoute().routes(tabs[1]),
-        PostRoute().routes(tabs[2]),
-      ],
-    )
-  ];
+  const MyApp({super.key});
   @override
-  Widget build(BuildContext context) => MaterialApp.router(
+  Widget build(BuildContext context) {
+    final routes = [
+      QRoute.withChild(
+        path: '/home',
+        initRoute: '/test1',
+        builderChild: (router) => HomeScreen(router: router),
+        children: [
+          PostRoute().routes(tabs[0]),
+          PostRoute().routes(tabs[1]),
+          PostRoute().routes(tabs[2]),
+        ],
+      )
+    ];
+    return MaterialApp.router(
       routeInformationParser: const QRouteInformationParser(),
-      routerDelegate: QRouterDelegate(routes, initPath: '/home'));
+      routerDelegate: QRouterDelegate(routes, initPath: '/home'),
+    );
+  }
 }
 
 class PostRoute {
@@ -62,7 +66,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key, required this.router}) : super(key: key);
   final QRouter router;
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -105,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
 class PostRouteWrapper extends StatelessWidget {
   final QRouter router;
   final String name;
-  const PostRouteWrapper(this.router, this.name);
+  const PostRouteWrapper(this.router, this.name, {super.key});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

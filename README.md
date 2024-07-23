@@ -6,6 +6,10 @@
     - [Bottom Navigation Bar](#bottom-navigation-bar)
     - [Tab view](#tab-view)
     - [Navigation rail](#navigation-rail)
+  - [Examples](#examples)
+    - [Can Pop](#can-pop)
+    - [Return data](#return-data)
+    - [Temporary Route](#temporary-route)
   - [Flutter UXR](#flutter-uxr)
   - [More Samples](#more-samples)
 
@@ -29,13 +33,26 @@ An app with this structure can be done like [this](lib/common_cases/bottom_nav_b
 
 ![Dashboard](assets/BottomNB.png)
 
-### Tab view
+### [Tab view](lib/common_cases/tab_view.dart)
 
-[TabView](lib/common_cases/tab_view.dart)
+### [Navigation rail](lib/common_cases/nav_rail.dart) 
 
-### Navigation rail
 
-[NavRail](lib/common_cases/nav_rail.dart)
+
+## Examples
+
+### [Can Pop](lib/examples/can_pop.dart)
+
+This example shows how to use the `canPop` function to prevent the user from leaving the page if he has unsaved data.
+
+### [Return data](lib/examples/return_data.dart)
+
+This example shows how to return data from the page that you navigate to.
+
+### [Temporary Route](lib/examples/temporary_route.dart)
+
+This example will show how to use the temporary route to show a page or just a bottom sheet that contains this page depending on the screen width.
+
 
 ## Flutter UXR
 

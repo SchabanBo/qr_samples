@@ -35,6 +35,12 @@
             "program": "lib/examples/return_data.dart"
         },
         {
+            "name": "Temporary router",
+            "type": "dart",
+            "request": "launch",
+            "program": "lib/examples/temporary_router.dart"
+        },
+        {
             "name": "Deeplink Pathparam",
             "type": "dart",
             "request": "launch",

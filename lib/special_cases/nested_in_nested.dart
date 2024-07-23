@@ -2,13 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final routes = [
-    QRoute(path: '/', builder: () => const WelcomePage()),
-    QRoute.withChild(
+  const MyApp({super.key});
+  @override
+  Widget build(BuildContext context) {
+    final routes = [
+      QRoute(path: '/', builder: () => const WelcomePage()),
+      QRoute.withChild(
         path: 'nested-1',
         builderChild: (r) => Nested1(r),
         children: [
@@ -16,24 +19,28 @@ class MyApp extends StatelessWidget {
           QRoute(path: '/1', builder: () => const WelcomePage(index: 1)),
           QRoute(path: '/2', builder: () => const WelcomePage(index: 2)),
           QRoute.withChild(
-              path: 'nested-2',
-              builderChild: (r) => Nested2(r),
-              children: [
-                QRoute(path: '/', builder: () => const WelcomePage()),
-                QRoute(path: '/3', builder: () => const WelcomePage(index: 3)),
-                QRoute(path: '/4', builder: () => const WelcomePage(index: 4)),
-              ]),
-        ])
-  ];
-  @override
-  Widget build(BuildContext context) => MaterialApp.router(
+            path: 'nested-2',
+            builderChild: (r) => Nested2(r),
+            children: [
+              QRoute(path: '/', builder: () => const WelcomePage()),
+              QRoute(path: '/3', builder: () => const WelcomePage(index: 3)),
+              QRoute(path: '/4', builder: () => const WelcomePage(index: 4)),
+            ],
+          ),
+        ],
+      )
+    ];
+
+    return MaterialApp.router(
       routeInformationParser: const QRouteInformationParser(),
-      routerDelegate: QRouterDelegate(routes));
+      routerDelegate: QRouterDelegate(routes),
+    );
+  }
 }
 
 class WelcomePage extends StatelessWidget {
   final int? index;
-  const WelcomePage({this.index});
+  const WelcomePage({super.key, this.index});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,7 +62,7 @@ class WelcomePage extends StatelessWidget {
 
 class Nested1 extends StatelessWidget {
   final QRouter router;
-  const Nested1(this.router);
+  const Nested1(this.router, {super.key});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -65,9 +72,11 @@ class Nested1 extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             TextButton(
-                onPressed: () => QR.to('nested-1/1'), child: const Text('Go to 1')),
+                onPressed: () => QR.to('nested-1/1'),
+                child: const Text('Go to 1')),
             TextButton(
-                onPressed: () => QR.to('nested-1/2'), child: const Text('Go to 2')),
+                onPressed: () => QR.to('nested-1/2'),
+                child: const Text('Go to 2')),
             TextButton(
                 onPressed: () => QR.to('nested-1/nested-2'),
                 child: const Text('Go to nested-2')),
@@ -87,7 +96,7 @@ class Nested1 extends StatelessWidget {
 
 class Nested2 extends StatelessWidget {
   final QRouter router;
-  const Nested2(this.router);
+  const Nested2(this.router, {super.key});
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;

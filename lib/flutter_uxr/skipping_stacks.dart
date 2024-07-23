@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 void main() {
-  runApp(BooksApp());
+  runApp(const BooksApp());
 }
 
 class Book {
@@ -23,14 +23,15 @@ class Author {
 }
 
 class BooksApp extends StatelessWidget {
-  final List<Book> books = [
-    Book('Stranger in a Strange Land', Author('Robert A. Heinlein')),
-    Book('Foundation', Author('Isaac Asimov')),
-    Book('Fahrenheit 451', Author('Ray Bradbury')),
-  ];
+  const BooksApp({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final List<Book> books = [
+      Book('Stranger in a Strange Land', Author('Robert A. Heinlein')),
+      Book('Foundation', Author('Isaac Asimov')),
+      Book('Fahrenheit 451', Author('Ray Bradbury')),
+    ];
     return MaterialApp.router(
       title: 'Books App',
       routerDelegate: QRouterDelegate([
@@ -59,7 +60,7 @@ class BooksApp extends StatelessWidget {
 class BooksListScreen extends StatelessWidget {
   final List<Book> books;
 
-  const BooksListScreen({required this.books});
+  const BooksListScreen({super.key, required this.books});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -79,7 +80,7 @@ class BooksListScreen extends StatelessWidget {
 class AuthorsListScreen extends StatelessWidget {
   final List<Author> authors;
 
-  const AuthorsListScreen({required this.authors});
+  const AuthorsListScreen({super.key, required this.authors});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -103,7 +104,7 @@ class AuthorsListScreen extends StatelessWidget {
 class BookDetailsScreen extends StatelessWidget {
   final Book book;
 
-  const BookDetailsScreen({required this.book});
+  const BookDetailsScreen({super.key, required this.book});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -113,7 +114,7 @@ class BookDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(book.title, style: Theme.of(context).textTheme.headline6),
+              Text(book.title, style: Theme.of(context).textTheme.titleLarge),
               ElevatedButton(
                 onPressed: () => QR.navigator
                     .replaceAll('/authors/${QR.params['bookIndex']!.asInt!}'),
@@ -128,7 +129,7 @@ class BookDetailsScreen extends StatelessWidget {
 class AuthorDetailsScreen extends StatelessWidget {
   final Author author;
 
-  const AuthorDetailsScreen({required this.author});
+  const AuthorDetailsScreen({super.key, required this.author});
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -138,7 +139,7 @@ class AuthorDetailsScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(author.name, style: Theme.of(context).textTheme.headline6)
+              Text(author.name, style: Theme.of(context).textTheme.titleLarge)
             ],
           ),
         ),

@@ -65,6 +65,8 @@ class AppRoutes {
 
 class BooksApp extends StatelessWidget {
   final routes = AppRoutes();
+
+  BooksApp({super.key});
   @override
   Widget build(BuildContext context) => MaterialApp.router(
       routeInformationParser: const QRouteInformationParser(),
@@ -74,6 +76,7 @@ class BooksApp extends StatelessWidget {
 class HomeScreen extends StatelessWidget {
   final VoidCallback onSignOut;
   const HomeScreen({
+    super.key,
     required this.onSignOut,
   });
 
@@ -102,9 +105,9 @@ class HomeScreen extends StatelessWidget {
 class SignInScreen extends StatefulWidget {
   final ValueChanged<Credentials> onSignedIn;
 
-  const SignInScreen({required this.onSignedIn});
+  const SignInScreen({super.key, required this.onSignedIn});
   @override
-  _SignInScreenState createState() => _SignInScreenState();
+  State<SignInScreen> createState() => _SignInScreenState();
 }
 
 class _SignInScreenState extends State<SignInScreen> {
@@ -142,7 +145,7 @@ class _SignInScreenState extends State<SignInScreen> {
 }
 
 class BooksListScreen extends StatelessWidget {
-  const BooksListScreen();
+  const BooksListScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

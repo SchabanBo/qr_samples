@@ -122,12 +122,12 @@ class TabWidget extends StatelessWidget {
       children: [
         Text(
           'Tab ${index + 1}',
-          style: Theme.of(context).textTheme.headline2,
+          style: Theme.of(context).textTheme.displayMedium,
         ),
         const SizedBox(height: 16),
         Text(
           MobileRoutes.tabs[index],
-          style: Theme.of(context).textTheme.headline3,
+          style: Theme.of(context).textTheme.displaySmall,
         ),
       ],
     );

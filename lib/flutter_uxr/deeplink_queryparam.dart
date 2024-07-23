@@ -4,16 +4,18 @@ import 'package:flutter/material.dart';
 import 'package:qlevar_router/qlevar_router.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       routeInformationParser: const QRouteInformationParser(),
       routerDelegate: QRouterDelegate(
-        [QRoute(path: '/', builder: () => BooksListScreen())],
+        [QRoute(path: '/', builder: () => const BooksListScreen())],
       ),
     );
   }
@@ -27,13 +29,14 @@ class Book {
 }
 
 class BooksListScreen extends StatelessWidget {
-  final books = [
-    Book('Stranger in a Strange Land', 'Robert A. Heinlein'),
-    Book('Foundation', 'Isaac Asimov'),
-    Book('Fahrenheit 451', 'Ray Bradbury'),
-  ];
+  const BooksListScreen({super.key});
   @override
   Widget build(BuildContext context) {
+    final books = [
+      Book('Stranger in a Strange Land', 'Robert A. Heinlein'),
+      Book('Foundation', 'Isaac Asimov'),
+      Book('Fahrenheit 451', 'Ray Bradbury'),
+    ];
     print(QR.params.asStringMap());
     final filter = QR.params['filter'];
     final random = QR.params['random']?.asDouble ?? 0;
